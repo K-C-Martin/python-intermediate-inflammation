@@ -5,28 +5,28 @@ import numpy.testing as npt
 import pytest
 
 
-def test_daily_max():
+@pytest.mark.parametrize(
+    "test, expected",
+    [
+        ([[1, 2], [3, 4], [5, 6]], [5, 6]),
+        ([[0, 0], [0, 4], [0, 6]], [0, 6])
+    ])
+def test_daily_max(test, expected):
     """Test max function"""
     from inflammation.models import daily_max
-
-    test_input = np.array([[1, 2],
-                           [3, 4],
-                           [5, 6]])
-    test_result = np.array([5, 6])
-
-    npt.assert_array_equal(daily_max(test_input), test_result)
+    npt.assert_array_equal(daily_max(test), expected)
 
 
-def test_daily_min():
+@pytest.mark.parametrize(
+    "test, expected",
+    [
+        ([[1, 2], [3, 4], [5, 6]], [1, 2]),
+        ([[0, 0], [0, 4], [0, 6]], [0, 0])
+     ])
+def test_daily_min(test, expected):
     """Test min function"""
     from inflammation.models import daily_min
-
-    test_input = np.array([[1, 2],
-                           [3, 4],
-                           [-5, 6]])
-    test_result = np.array([-5, 2])
-
-    npt.assert_array_equal(daily_min(test_input), test_result)
+    npt.assert_array_equal(daily_min(test), expected)
 
 
 def test_daily_min_string():

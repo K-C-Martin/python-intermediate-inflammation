@@ -5,6 +5,30 @@ import numpy.testing as npt
 import pytest
 
 
+def test_daily_max():
+    """Test max function"""
+    from inflammation.models import daily_max
+
+    test_input = np.array([[1, 2],
+                           [3, 4],
+                           [5, 6]])
+    test_result = np.array([5, 6])
+
+    npt.assert_array_equal(daily_max(test_input), test_result)
+
+
+def test_daily_min():
+    """Test min function"""
+    from inflammation.models import daily_min
+
+    test_input = np.array([[1, 2],
+                           [3, 4],
+                           [-5, 6]])
+    test_result = np.array([-5, 2])
+
+    npt.assert_array_equal(daily_min(test_input), test_result)
+
+
 def test_daily_min_string():
     """Test for TypeError when passing strings"""
     from inflammation.models import daily_min
